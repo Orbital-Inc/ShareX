@@ -2,7 +2,7 @@
 
 /*
     ShareX - A program that allows you to take screenshots and share any file type
-    Copyright (c) 2007-2025 ShareX Team
+    Copyright (c) 2007-2026 ShareX Team
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -39,8 +39,6 @@ namespace ShareX.UploadersLib
         Flickr,
         [Description("Photobucket")]
         Photobucket,
-        [Description("X")]
-        Twitter,
         [Description("Chevereto")]
         Chevereto,
         [Description("vgy.me")]
@@ -70,6 +68,8 @@ namespace ShareX.UploadersLib
         OneTimeSecret,
         [Description("Pastie")]
         Pastie,
+        [Description("PrivateBin")]
+        PrivateBin,
         CustomTextUploader, // Localized
         FileUploader // Localized
     }
@@ -89,8 +89,6 @@ namespace ShareX.UploadersLib
         Puush,
         [Description("Box")]
         Box,
-        [Description("MEGA")]
-        Mega,
         [Description("Amazon S3")]
         AmazonS3,
         [Description("Google Cloud Storage")]
@@ -109,8 +107,6 @@ namespace ShareX.UploadersLib
         SendSpace,
         [Description("Hostr")]
         Localhostr,
-        [Description("JIRA")]
-        Jira,
         [Description("Lambda")]
         Lambda,
         [Description("Pomf")]
@@ -170,12 +166,10 @@ namespace ShareX.UploadersLib
         CustomURLShortener // Localized
     }
 
-    [Description("URL sharing services"), DefaultValue(Twitter)]
+    [Description("URL sharing services"), DefaultValue(Email)]
     public enum URLSharingServices
     {
         Email, // Localized
-        [Description("X")]
-        Twitter,
         [Description("Facebook")]
         Facebook,
         [Description("Reddit")]
@@ -229,7 +223,9 @@ namespace ShareX.UploadersLib
         [Description("ftps://")]
         ftps,
         [Description("file://")]
-        file
+        file,
+        [Description("sftp://")]
+        sftp
     }
 
     public enum Privacy

@@ -2,7 +2,7 @@
 
 /*
     ShareX - A program that allows you to take screenshots and share any file type
-    Copyright (c) 2007-2025 ShareX Team
+    Copyright (c) 2007-2026 ShareX Team
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -58,15 +58,16 @@ namespace ShareX.Setup
 
         private static SetupJobs Job { get; set; } = SetupJobs.Release;
         private static bool Silent { get; set; } = false;
-        private static bool AppVeyor { get; set; } = false;
+        private static string Platform { get; set; } = "x64";
 
         private static string ParentDir;
         private static string Configuration;
         private static string AppVersion;
         private static string WindowsKitsDir;
 
+        private static string RuntimeId => Platform == "arm64" ? "win-arm64" : "win-x64";
         private static string SolutionPath => Path.Combine(ParentDir, "ShareX.sln");
-        private static string BinDir => Path.Combine(ParentDir, "ShareX", "bin", Configuration);
+        private static string BinDir => Path.Combine(ParentDir, "ShareX", "bin", Configuration, RuntimeId);
         private static string SteamLauncherDir => Path.Combine(ParentDir, "ShareX.Steam", "bin", Configuration);
         private static string ExecutablePath => Path.Combine(BinDir, "ShareX.exe");
 
@@ -81,21 +82,21 @@ namespace ShareX.Setup
         private static string InnoSetupDir => Path.Combine(SetupDir, "InnoSetup");
         private static string MicrosoftStorePackageFilesDir => Path.Combine(SetupDir, "MicrosoftStore");
 
-        private static string SetupPath => Path.Combine(OutputDir, $"ShareX-{AppVersion}-setup.exe");
-        private static string PortableZipPath => Path.Combine(OutputDir, $"ShareX-{AppVersion}-portable.zip");
-        private static string DebugZipPath => Path.Combine(OutputDir, $"ShareX-{AppVersion}-debug.zip");
+        private static string SetupPath => Path.Combine(OutputDir, $"ShareX-{AppVersion}-setup-{Platform}.exe");
+        private static string PortableZipPath => Path.Combine(OutputDir, $"ShareX-{AppVersion}-portable-{Platform}.zip");
+        private static string DebugZipPath => Path.Combine(OutputDir, $"ShareX-{AppVersion}-debug-{Platform}.zip");
         private static string SteamUpdatesDir => Path.Combine(SteamOutputDir, "Updates");
-        private static string SteamZipPath => Path.Combine(OutputDir, $"ShareX-{AppVersion}-Steam.zip");
-        private static string MicrosoftStoreAppxPath => Path.Combine(OutputDir, $"ShareX-{AppVersion}.appx");
-        private static string MicrosoftStoreDebugAppxPath => Path.Combine(OutputDir, $"ShareX-{AppVersion}-debug.appx");
+        private static string SteamZipPath => Path.Combine(OutputDir, $"ShareX-{AppVersion}-Steam-{Platform}.zip");
+        private static string MicrosoftStoreAppxPath => Path.Combine(OutputDir, $"ShareX-{AppVersion}-MicrosoftStore-{Platform}.appx");
+        private static string MicrosoftStoreDebugAppxPath => Path.Combine(OutputDir, $"ShareX-{AppVersion}-MicrosoftStore-debug-{Platform}.appx");
         private static string FFmpegPath => Path.Combine(OutputDir, "ffmpeg.exe");
         private static string RecorderDevicesSetupPath => Path.Combine(OutputDir, $"recorder-devices-{RecorderDevicesVersion}-setup.exe");
         private static string ExifToolPath => Path.Combine(OutputDir, "exiftool.exe");
         private static string MakeAppxPath => Path.Combine(WindowsKitsDir, "x64", "makeappx.exe");
 
         private const string InnoSetupCompilerPath = @"C:\Program Files (x86)\Inno Setup 6\ISCC.exe";
-        private const string FFmpegVersion = "7.1";
-        private static string FFmpegDownloadURL = $"https://github.com/ShareX/FFmpeg/releases/download/v{FFmpegVersion}/ffmpeg-{FFmpegVersion}-win64.zip";
+        private const string FFmpegVersion = "8.0";
+        private static string FFmpegDownloadURL = $"https://github.com/ShareX/FFmpeg/releases/download/v{FFmpegVersion}/ffmpeg-{FFmpegVersion}-win-{Platform}.zip";
         private const string RecorderDevicesVersion = "0.12.10";
         private static string RecorderDevicesDownloadURL = $"https://github.com/ShareX/RecorderDevices/releases/download/v{RecorderDevicesVersion}/recorder-devices-{RecorderDevicesVersion}-setup.exe";
         private const string ExifToolVersion = "13.29";
@@ -171,11 +172,6 @@ namespace ShareX.Setup
                 }
             }
 
-            if (AppVeyor)
-            {
-                FileHelpers.CopyAll(OutputDir, ParentDir);
-            }
-
             if (!Silent && Job.HasFlag(SetupJobs.OpenOutputDirectory))
             {
                 FileHelpers.OpenFolder(OutputDir, false);
@@ -190,7 +186,6 @@ namespace ShareX.Setup
             cli.ParseCommands();
 
             Silent = cli.IsCommandExist("Silent");
-            AppVeyor = cli.IsCommandExist("AppVeyor");
 
             if (Silent)
             {
@@ -214,6 +209,14 @@ namespace ShareX.Setup
                     Environment.Exit(0);
                 }
             }
+
+            CLICommand platformCommand = cli.GetCommand("Platform");
+
+            if (platformCommand != null)
+            {
+                Platform = platformCommand.Parameter.ToLowerInvariant();
+                Console.WriteLine("Platform: " + Platform);
+            }
         }
 
         private static void UpdatePaths()
@@ -224,7 +227,7 @@ namespace ShareX.Setup
             {
                 Console.WriteLine("Invalid parent directory: " + ParentDir);
 
-                ParentDir = FileHelpers.GetAbsolutePath(@"..\..\..\");
+                ParentDir = FileHelpers.GetAbsolutePath(@"..\..\..\..\");
 
                 if (!File.Exists(SolutionPath))
                 {
@@ -294,7 +297,7 @@ namespace ShareX.Setup
                     {
                         FileName = InnoSetupCompilerPath,
                         WorkingDirectory = InnoSetupDir,
-                        Arguments = $"/Q \"{fileName}\"",
+                        Arguments = $"/Q /DPlatform={Platform} \"{fileName}\"",
                         UseShellExecute = false
                     };
 
@@ -364,9 +367,9 @@ namespace ShareX.Setup
 
             Directory.CreateDirectory(destination);
 
-            FileHelpers.CopyFiles(Path.Combine(source, "ShareX.exe"), destination);
-            FileHelpers.CopyFiles(Path.Combine(source, "ShareX.exe.config"), destination);
+            FileHelpers.CopyFiles(source, destination, "*.exe");
             FileHelpers.CopyFiles(source, destination, "*.dll");
+            FileHelpers.CopyFiles(source, destination, "*.json");
 
             if (job == SetupJobs.CreateDebug || job == SetupJobs.CreateMicrosoftStoreDebugFolder)
             {
@@ -381,12 +384,9 @@ namespace ShareX.Setup
                 {
                     FileHelpers.CopyFiles(RecorderDevicesSetupPath, destination);
                 }
-
-                FileHelpers.CopyFiles(Path.Combine(source, "ShareX_File_Icon.ico"), destination);
-                FileHelpers.CopyFiles(Path.Combine(source, "ShareX_NativeMessagingHost.exe"), destination);
-                FileHelpers.CopyFiles(Path.Combine(source, "host-manifest-chrome.json"), destination);
-                FileHelpers.CopyFiles(Path.Combine(source, "host-manifest-firefox.json"), destination);
             }
+
+            FileHelpers.CopyFiles(Path.Combine(source, "ShareX_File_Icon.ico"), destination);
 
             foreach (string directory in Directory.GetDirectories(source))
             {
@@ -418,6 +418,15 @@ namespace ShareX.Setup
             else if (job == SetupJobs.CreateMicrosoftStoreFolder || job == SetupJobs.CreateMicrosoftStoreDebugFolder)
             {
                 FileHelpers.CopyAll(MicrosoftStorePackageFilesDir, destination);
+
+                string manifestPath = Path.Combine(destination, "AppxManifest.xml");
+
+                if (File.Exists(manifestPath))
+                {
+                    string manifestContent = File.ReadAllText(manifestPath);
+                    manifestContent = manifestContent.Replace("{PLATFORM}", Platform);
+                    File.WriteAllText(manifestPath, manifestContent);
+                }
             }
 
             Console.WriteLine("Folder created: " + destination);

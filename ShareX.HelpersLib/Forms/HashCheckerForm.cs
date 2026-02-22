@@ -2,7 +2,7 @@
 
 /*
     ShareX - A program that allows you to take screenshots and share any file type
-    Copyright (c) 2007-2025 ShareX Team
+    Copyright (c) 2007-2026 ShareX Team
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@
 
 using ShareX.HelpersLib.Properties;
 using System;
-using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -43,6 +42,8 @@ namespace ShareX.HelpersLib
         {
             InitializeComponent();
             ShareXResources.ApplyTheme(this, true);
+            pbTick.BackColor = txtTarget.BackColor;
+            pbCross.BackColor = txtTarget.BackColor;
 
             UpdateCompareControls();
             UpdateCheckButton();
@@ -59,6 +60,8 @@ namespace ShareX.HelpersLib
             {
                 txtFilePath.Text = filePath;
             }
+
+            UpdateResult();
         }
 
         protected void OnPlayNotificationSound()
@@ -95,19 +98,19 @@ namespace ShareX.HelpersLib
             {
                 if (txtResult.Text.Equals(txtTarget.Text, StringComparison.OrdinalIgnoreCase))
                 {
-                    txtTarget.BackColor = Color.FromArgb(200, 255, 200);
+                    pbTick.Visible = true;
+                    pbCross.Visible = false;
                 }
                 else
                 {
-                    txtTarget.BackColor = Color.FromArgb(255, 200, 200);
+                    pbTick.Visible = false;
+                    pbCross.Visible = true;
                 }
-
-                txtTarget.ForeColor = SystemColors.ControlText;
             }
             else
             {
-                txtTarget.BackColor = txtResult.BackColor;
-                txtTarget.ForeColor = txtResult.ForeColor;
+                pbTick.Visible = false;
+                pbCross.Visible = false;
             }
         }
 

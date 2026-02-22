@@ -2,7 +2,7 @@
 
 /*
     ShareX - A program that allows you to take screenshots and share any file type
-    Copyright (c) 2007-2025 ShareX Team
+    Copyright (c) 2007-2026 ShareX Team
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -130,7 +130,7 @@ namespace ShareX
 
         #region Upload
 
-        public int UploadLimit = 5;
+        public int UploadLimit = 0;
         public int BufferSizePower = 5;
         public List<ClipboardFormat> ClipboardContentFormats = new List<ClipboardFormat>();
 
@@ -168,6 +168,9 @@ namespace ShareX
 
         #region Advanced
 
+        [Category("Application"), DefaultValue(false), Description("Enables the new modern image editor (Experimental).")]
+        public bool UseModernImageEditor { get; set; }
+
         [Category("Application"), DefaultValue(false), Description("Calculate and show file sizes in binary units (KiB, MiB etc.)")]
         public bool BinaryUnits { get; set; }
 
@@ -187,7 +190,7 @@ namespace ShareX
         [Editor(typeof(ExeFileNameEditor), typeof(UITypeEditor))]
         public string BrowserPath { get; set; }
 
-        [Category("Application"), DefaultValue(false), Description("Save settings after task completed but only if there is no other active tasks.")]
+        [Category("Application"), DefaultValue(false), Description("Save settings after task completed but only if there are no other active tasks.")]
         public bool SaveSettingsAfterTaskCompleted { get; set; }
 
         [Category("Application"), DefaultValue(false), Description("In main window when task is completed automatically select it.")]
@@ -241,20 +244,17 @@ namespace ShareX
         [Category("Upload"), DefaultValue(false), Description("Can be used to disable uploading application wide.")]
         public bool DisableUpload { get; set; }
 
-        [Category("Upload"), DefaultValue(false), Description("Accept invalid SSL certificates when uploading.")]
-        public bool AcceptInvalidSSLCertificates { get; set; }
-
         [Category("Upload"), DefaultValue(true), Description("Ignore emojis while URL encoding upload results.")]
         public bool URLEncodeIgnoreEmoji { get; set; }
-
-        [Category("Upload"), DefaultValue(true), Description("Show first time upload warning.")]
-        public bool ShowUploadWarning { get; set; }
 
         [Category("Upload"), DefaultValue(true), Description("Show more than 10 files upload warning.")]
         public bool ShowMultiUploadWarning { get; set; }
 
         [Category("Upload"), DefaultValue(100), Description("Large file size defined in MB. ShareX will warn before uploading large files. 0 disables this feature.")]
         public int ShowLargeFileSizeWarning { get; set; }
+
+        [Category("Paths"), DefaultValue(false), Description("When enabled ShareX stores Uploaders configuration files per machine, e.g. UploadersConfig-MYPC.json.")]
+        public bool UseMachineSpecificUploadersConfig { get; set; }
 
         [Category("Paths"), Description("Custom uploaders configuration path. If you have already configured this setting in another device and you are attempting to use the same location, then backup the file before configuring this setting and restore after exiting ShareX.")]
         [Editor(typeof(DirectoryNameEditor), typeof(UITypeEditor))]

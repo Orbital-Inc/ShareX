@@ -2,7 +2,7 @@
 
 /*
     ShareX - A program that allows you to take screenshots and share any file type
-    Copyright (c) 2007-2025 ShareX Team
+    Copyright (c) 2007-2026 ShareX Team
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -294,14 +294,13 @@ namespace ShareX.UploadersLib
         {
             if (Config.CustomUploadersList != null && Config.CustomUploadersList.Count > 0)
             {
-                using (FolderSelectDialog fsd = new FolderSelectDialog())
+                string selectedPath = FileHelpers.BrowseFolder();
+
+                if (!string.IsNullOrEmpty(selectedPath))
                 {
-                    if (fsd.ShowDialog())
+                    foreach (CustomUploaderItem cui in Config.CustomUploadersList)
                     {
-                        foreach (CustomUploaderItem cui in Config.CustomUploadersList)
-                        {
-                            CustomUploaderSerialize(cui, fsd.FileName);
-                        }
+                        CustomUploaderSerialize(cui, selectedPath);
                     }
                 }
             }
@@ -309,38 +308,37 @@ namespace ShareX.UploadersLib
 
         private void CustomUploaderUpdateFolder()
         {
-            using (FolderSelectDialog fsd = new FolderSelectDialog())
+            string selectedPath = FileHelpers.BrowseFolder();
+
+            if (!string.IsNullOrEmpty(selectedPath))
             {
-                if (fsd.ShowDialog())
+                string folderPath = selectedPath;
+                string[] files = Directory.GetFiles(folderPath, "*.sxcu", SearchOption.TopDirectoryOnly);
+
+                int updated = 0;
+
+                if (files != null)
                 {
-                    string folderPath = fsd.FileName;
-                    string[] files = Directory.GetFiles(folderPath, "*.sxcu", SearchOption.TopDirectoryOnly);
-
-                    int updated = 0;
-
-                    if (files != null)
+                    foreach (string filePath in files)
                     {
-                        foreach (string filePath in files)
-                        {
-                            CustomUploaderItem cui = JsonHelpers.DeserializeFromFile<CustomUploaderItem>(filePath);
+                        CustomUploaderItem cui = JsonHelpers.DeserializeFromFile<CustomUploaderItem>(filePath);
 
-                            if (cui != null)
+                        if (cui != null)
+                        {
+                            try
                             {
-                                try
-                                {
-                                    cui.CheckBackwardCompatibility();
-                                    CustomUploaderSerialize(cui, folderPath);
-                                    updated++;
-                                }
-                                catch
-                                {
-                                }
+                                cui.CheckBackwardCompatibility();
+                                CustomUploaderSerialize(cui, folderPath);
+                                updated++;
+                            }
+                            catch
+                            {
                             }
                         }
                     }
-
-                    MessageBox.Show($"{updated} custom uploader files updated.", "ShareX", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+
+                MessageBox.Show($"{updated} custom uploader files updated.", "ShareX", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

@@ -2,7 +2,7 @@
 
 /*
     ShareX - A program that allows you to take screenshots and share any file type
-    Copyright (c) 2007-2025 ShareX Team
+    Copyright (c) 2007-2026 ShareX Team
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -278,6 +278,7 @@ namespace ShareX
             cbCaptureShadow.Checked = TaskSettings.CaptureSettings.CaptureShadow;
             nudCaptureShadowOffset.SetValue(TaskSettings.CaptureSettings.CaptureShadowOffset);
             cbCaptureClientArea.Checked = TaskSettings.CaptureSettings.CaptureClientArea;
+            cbCaptureAutoHideDesktopIcons.Checked = TaskSettings.CaptureSettings.CaptureAutoHideDesktopIcons;
             cbCaptureAutoHideTaskbar.Checked = TaskSettings.CaptureSettings.CaptureAutoHideTaskbar;
             nudCaptureCustomRegionX.SetValue(TaskSettings.CaptureSettings.CaptureCustomRegion.X);
             nudCaptureCustomRegionY.SetValue(TaskSettings.CaptureSettings.CaptureCustomRegion.Y);
@@ -318,6 +319,7 @@ namespace ShareX
             nudRegionCaptureMagnifierPixelSize.Minimum = RegionCaptureOptions.MagnifierPixelSizeMinimum;
             nudRegionCaptureMagnifierPixelSize.Maximum = RegionCaptureOptions.MagnifierPixelSizeMaximum;
             nudRegionCaptureMagnifierPixelSize.SetValue(TaskSettings.CaptureSettings.SurfaceOptions.MagnifierPixelSize);
+            cbRegionCaptureShowCenterCrosshair.Checked = TaskSettings.CaptureSettings.SurfaceOptions.ShowCenterCrosshair;
             cbRegionCaptureShowCrosshair.Checked = TaskSettings.CaptureSettings.SurfaceOptions.ShowCrosshair;
             cbRegionCaptureIsFixedSize.Checked = TaskSettings.CaptureSettings.SurfaceOptions.IsFixedSize;
             nudRegionCaptureFixedSizeWidth.Enabled = nudRegionCaptureFixedSizeHeight.Enabled = TaskSettings.CaptureSettings.SurfaceOptions.IsFixedSize;
@@ -1091,6 +1093,11 @@ namespace ShareX
             TaskSettings.CaptureSettings.CaptureClientArea = cbCaptureClientArea.Checked;
         }
 
+        private void cbCaptureAutoHideDesktopIcons_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.CaptureAutoHideDesktopIcons = cbCaptureAutoHideDesktopIcons.Checked;
+        }
+
         private void cbCaptureAutoHideTaskbar_CheckedChanged(object sender, EventArgs e)
         {
             TaskSettings.CaptureSettings.CaptureAutoHideTaskbar = cbCaptureAutoHideTaskbar.Checked;
@@ -1249,6 +1256,11 @@ namespace ShareX
             {
                 TaskSettings.CaptureSettings.SurfaceOptions.MagnifierPixelSize = (int)nudRegionCaptureMagnifierPixelSize.Value;
             }
+        }
+
+        private void cbRegionCaptureShowCenterCrosshair_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.SurfaceOptions.ShowCenterCrosshair = cbRegionCaptureShowCenterCrosshair.Checked;
         }
 
         private void cbRegionCaptureShowCrosshair_CheckedChanged(object sender, EventArgs e)

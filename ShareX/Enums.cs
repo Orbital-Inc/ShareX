@@ -2,7 +2,7 @@
 
 /*
     ShareX - A program that allows you to take screenshots and share any file type
-    Copyright (c) 2007-2025 ShareX Team
+    Copyright (c) 2007-2026 ShareX Team
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -145,11 +145,12 @@ namespace ShareX
         CopyFileToClipboard = 1 << 12,
         CopyFilePathToClipboard = 1 << 13,
         ShowInExplorer = 1 << 14,
-        ScanQRCode = 1 << 15,
-        DoOCR = 1 << 16,
-        ShowBeforeUploadWindow = 1 << 17,
-        UploadImageToHost = 1 << 18,
-        DeleteFile = 1 << 19
+        AnalyzeImage = 1 << 15,
+        ScanQRCode = 1 << 16,
+        DoOCR = 1 << 17,
+        ShowBeforeUploadWindow = 1 << 18,
+        UploadImageToHost = 1 << 19,
+        DeleteFile = 1 << 20
     }
 
     [Flags]
@@ -205,8 +206,6 @@ namespace ShareX
         [Category(EnumExtensions.HotkeyType_Category_Upload)]
         ShortenURL,
         [Category(EnumExtensions.HotkeyType_Category_Upload)]
-        TweetMessage,
-        [Category(EnumExtensions.HotkeyType_Category_Upload)]
         StopUploads,
         // Screen capture
         [Category(EnumExtensions.HotkeyType_Category_ScreenCapture)]
@@ -233,6 +232,8 @@ namespace ShareX
         AutoCapture,
         [Category(EnumExtensions.HotkeyType_Category_ScreenCapture)]
         StartAutoCapture,
+        [Category(EnumExtensions.HotkeyType_Category_ScreenCapture)]
+        StopAutoCapture,
         // Screen record
         [Category(EnumExtensions.HotkeyType_Category_ScreenRecord)]
         ScreenRecorder,
@@ -292,6 +293,8 @@ namespace ShareX
         [Category(EnumExtensions.HotkeyType_Category_Tools)]
         VideoThumbnailer,
         [Category(EnumExtensions.HotkeyType_Category_Tools)]
+        AnalyzeImage,
+        [Category(EnumExtensions.HotkeyType_Category_Tools)]
         OCR,
         [Category(EnumExtensions.HotkeyType_Category_Tools)]
         QRCode,
@@ -350,7 +353,8 @@ namespace ShareX
         OpenFolder,
         OpenUrl,
         Upload,
-        PinToScreen
+        PinToScreen,
+        DeleteFile
     }
 
     public enum ThumbnailViewClickAction // Localized
@@ -390,6 +394,12 @@ namespace ShareX
     public enum RegionCaptureType
     {
         Default, Light, Transparent
+    }
+
+    public enum ScreenTearingTestMode
+    {
+        VerticalLines,
+        HorizontalLines
     }
 
 #if !MicrosoftStore

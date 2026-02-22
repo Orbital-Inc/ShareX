@@ -2,7 +2,7 @@
 
 /*
     ShareX - A program that allows you to take screenshots and share any file type
-    Copyright (c) 2007-2025 ShareX Team
+    Copyright (c) 2007-2026 ShareX Team
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -40,8 +40,9 @@ namespace ShareX
         {
             InitializeComponent();
             lblProductName.Text = Program.Title;
-            pbLogo.Image = ShareXResources.Logo;
             ShareXResources.ApplyTheme(this, true);
+            pLogo.BackColor = Color.FromArgb(35, 35, 35);
+            cLogo.BackColor = Color.FromArgb(35, 35, 35);
 
 #if STEAM
             uclUpdate.Visible = false;
@@ -68,6 +69,12 @@ namespace ShareX
 {Resources.AboutForm_AboutForm_Project_page}: {Links.GitHub}
 {Resources.AboutForm_AboutForm_Changelog}: {Links.Changelog}
 {Resources.AboutForm_AboutForm_Privacy_policy}: {Links.PrivacyPolicy}
+{Resources.AboutForm_AboutForm_Donate}: {Links.Donate}
+X: {Links.X}
+Discord: {Links.Discord}
+Reddit: {Links.Reddit}
+Steam: {Links.Steam}
+Microsoft Store: {Links.MicrosoftStore}
 ", FontStyle.Regular);
 
             rtbInfo.AppendLine(Resources.AboutForm_AboutForm_Team, FontStyle.Bold, 13);
@@ -110,13 +117,11 @@ FFmpeg: https://www.ffmpeg.org
 Recorder devices: https://github.com/rdp/screen-capture-recorder-to-video-windows-free
 FluentFTP: https://github.com/robinrodricks/FluentFTP
 ZXing.Net: https://github.com/micjahn/ZXing.Net
-MegaApiClient: https://github.com/gpailler/MegaApiClient
-Inno Setup Dependency Installer: https://github.com/DomGries/InnoDependencyInstaller
 Blob Emoji: http://blobs.gg
 ExifTool: https://exiftool.org
 ", FontStyle.Regular);
 
-            rtbInfo.AppendText("Copyright (c) 2007-2025 ShareX Team", FontStyle.Bold, 13);
+            rtbInfo.AppendText("Copyright (c) 2007-2026 ShareX Team", FontStyle.Bold, 13);
 
             easterEgg = new EasterEggAboutAnimation(cLogo, this);
         }
@@ -142,22 +147,6 @@ ExifTool: https://exiftool.org
         private void rtb_LinkClicked(object sender, LinkClickedEventArgs e)
         {
             URLHelpers.OpenURL(e.LinkText);
-        }
-
-        private void btnShareXLicense_Click(object sender, EventArgs e)
-        {
-            FileHelpers.OpenFile(FileHelpers.GetAbsolutePath("Licenses\\ShareX_license.txt"));
-        }
-
-        private void btnLicenses_Click(object sender, EventArgs e)
-        {
-            FileHelpers.OpenFolder(FileHelpers.GetAbsolutePath("Licenses"));
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
         }
     }
 }

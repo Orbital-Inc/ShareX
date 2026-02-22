@@ -2,7 +2,7 @@
 
 /*
     ShareX - A program that allows you to take screenshots and share any file type
-    Copyright (c) 2007-2025 ShareX Team
+    Copyright (c) 2007-2026 ShareX Team
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -507,13 +507,11 @@ namespace ShareX.HelpersLib
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                g.SetHighQuality();
                 g.DrawImage(img, margin.Left, margin.Top, img.Width, img.Height);
 
                 if (canvasColor.A > 0)
                 {
                     g.CompositingMode = CompositingMode.SourceCopy;
-                    g.SmoothingMode = SmoothingMode.None;
 
                     using (Brush brush = new SolidBrush(canvasColor))
                     {
@@ -541,6 +539,17 @@ namespace ShareX.HelpersLib
             }
 
             return bmp;
+        }
+
+        public static void DrawImageCentered(Bitmap bmp1, Bitmap bmp2)
+        {
+            using (Graphics g = Graphics.FromImage(bmp1))
+            {
+                g.PixelOffsetMode = PixelOffsetMode.Half;
+                int x = (bmp1.Width - bmp2.Width) / 2;
+                int y = (bmp1.Height - bmp2.Height) / 2;
+                g.DrawImage(bmp2, x, y, bmp2.Width, bmp2.Height);
+            }
         }
 
         public static Bitmap DrawBackgroundImage(Bitmap bmp, Bitmap backgroundImage, bool center = true, bool tile = false)
@@ -770,7 +779,6 @@ namespace ShareX.HelpersLib
             using (reflection)
             using (Graphics g = Graphics.FromImage(bmpResult))
             {
-                g.SetHighQuality();
                 g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
                 g.DrawImage(reflection, 0, bmp.Height + offset, reflection.Width, reflection.Height);
             }
@@ -902,7 +910,6 @@ namespace ShareX.HelpersLib
                 using (Graphics g = Graphics.FromImage(bmpResult))
                 {
                     g.DrawRectangleProper(borderPen, 0, 0, bmpResult.Width, bmpResult.Height);
-                    g.SetHighQuality();
                     g.DrawImage(bmp, borderSize, borderSize, bmp.Width, bmp.Height);
                 }
             }
@@ -979,7 +986,6 @@ namespace ShareX.HelpersLib
             using (Brush checkerBrush = new TextureBrush(checker, WrapMode.Tile))
             {
                 g.FillRectangle(checkerBrush, new Rectangle(0, 0, bmpResult.Width, bmpResult.Height));
-                g.SetHighQuality();
                 g.DrawImage(img, 0, 0, img.Width, img.Height);
             }
 
@@ -1216,7 +1222,6 @@ namespace ShareX.HelpersLib
 
                     using (Graphics g = Graphics.FromImage(bmpResult))
                     {
-                        g.SetHighQuality();
                         g.DrawImage(bmpShadow, Math.Max(0, offset.X), Math.Max(0, offset.Y), bmpShadow.Width, bmpShadow.Height);
                         g.DrawImage(bmp, Math.Max(size, -offset.X + size), Math.Max(size, -offset.Y + size), bmp.Width, bmp.Height);
                     }
@@ -1227,7 +1232,6 @@ namespace ShareX.HelpersLib
 
                     using (Graphics g = Graphics.FromImage(bmpResult))
                     {
-                        g.SetHighQuality();
                         g.DrawImage(bmpShadow, -size + offset.X, -size + offset.Y, bmpShadow.Width, bmpShadow.Height);
                         g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
                     }
@@ -1276,7 +1280,6 @@ namespace ShareX.HelpersLib
 
                 using (Graphics g = Graphics.FromImage(bmpResult))
                 {
-                    g.SetHighQuality();
                     g.DrawImage(bmpMask, Math.Max(0, offset.X), Math.Max(0, offset.Y), bmpMask.Width, bmpMask.Height);
                     g.DrawImage(bmp, Math.Max(size, -offset.X + size), Math.Max(size, -offset.Y + size), bmp.Width, bmp.Height);
                 }
@@ -2264,6 +2267,15 @@ namespace ShareX.HelpersLib
             return null;
         }
 
+        public static Bitmap ByteArrayToBitmap(byte[] bytes)
+        {
+            using (MemoryStream ms = new MemoryStream(bytes))
+            using (Image tempImage = Image.FromStream(ms))
+            {
+                return new Bitmap(tempImage);
+            }
+        }
+
         public static Bitmap LoadImage(string filePath)
         {
             if (!string.IsNullOrEmpty(filePath))
@@ -2400,8 +2412,6 @@ namespace ShareX.HelpersLib
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                g.SetHighQuality();
-
                 for (int i = 0; i < imageCount; i++)
                 {
                     Bitmap image = images[i];
@@ -3075,6 +3085,22 @@ namespace ShareX.HelpersLib
                     quantized.Save(stream, ImageFormat.Gif);
                 }
             }
+        }
+
+        public static string ImageToBase64(Image image, ImageFormat format)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, format);
+                byte[] imageBytes = ms.ToArray();
+                return Convert.ToBase64String(imageBytes);
+            }
+        }
+
+        public static string ImageFileToBase64(string path)
+        {
+            byte[] imageBytes = File.ReadAllBytes(path);
+            return Convert.ToBase64String(imageBytes);
         }
     }
 }

@@ -669,6 +669,16 @@ namespace ShareX.ScreenCaptureLib.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap flashlight_shine {
+            get {
+                object obj = ResourceManager.GetObject("flashlight_shine", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap folder_open_image {
             get {
                 object obj = ResourceManager.GetObject("folder_open_image", resourceCulture);
@@ -1771,6 +1781,15 @@ namespace ShareX.ScreenCaptureLib.Properties {
         internal static string ShapeManager_CreateContextMenu_RememberMenuState {
             get {
                 return ResourceManager.GetString("ShapeManager_CreateContextMenu_RememberMenuState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show center crosshair.
+        /// </summary>
+        internal static string ShapeManager_CreateContextMenu_Show_center_crosshair {
+            get {
+                return ResourceManager.GetString("ShapeManager_CreateContextMenu_Show_center_crosshair", resourceCulture);
             }
         }
         

@@ -19,7 +19,7 @@ namespace ShareX.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -61,6 +61,16 @@ namespace ShareX.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap About_Logo {
+            get {
+                object obj = ResourceManager.GetObject("About_Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Changelog.
         /// </summary>
         internal static string AboutForm_AboutForm_Changelog {
@@ -75,6 +85,15 @@ namespace ShareX.Properties {
         internal static string AboutForm_AboutForm_Credits {
             get {
                 return ResourceManager.GetString("AboutForm_AboutForm_Credits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Donate.
+        /// </summary>
+        internal static string AboutForm_AboutForm_Donate {
+            get {
+                return ResourceManager.GetString("AboutForm_AboutForm_Donate", resourceCulture);
             }
         }
         
@@ -698,6 +717,16 @@ namespace ShareX.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_circle_double_135 {
+            get {
+                object obj = ResourceManager.GetObject("arrow-circle-double-135", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start.
         /// </summary>
         internal static string AutoCaptureForm_Execute_Start {
@@ -1082,6 +1111,16 @@ namespace ShareX.Properties {
         internal static System.Drawing.Bitmap clock__arrow {
             get {
                 object obj = ResourceManager.GetObject("clock__arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap clock__minus {
+            get {
+                object obj = ResourceManager.GetObject("clock__minus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2305,6 +2344,16 @@ namespace ShareX.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Play {
+            get {
+                object obj = ResourceManager.GetObject("Play", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap printer {
             get {
                 object obj = ResourceManager.GetObject("printer", resourceCulture);
@@ -2422,6 +2471,16 @@ namespace ShareX.Properties {
         internal static System.Drawing.Bitmap ro {
             get {
                 object obj = ResourceManager.GetObject("ro", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap robot {
+            get {
+                object obj = ResourceManager.GetObject("robot", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2624,24 +2683,6 @@ namespace ShareX.Properties {
         internal static string TaskHelpers_ToggleHotkeys_Hotkeys_enabled_ {
             get {
                 return ResourceManager.GetString("TaskHelpers_ToggleHotkeys_Hotkeys_enabled_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tweet successfully sent..
-        /// </summary>
-        internal static string TaskHelpers_TweetMessage_Tweet_successfully_sent_ {
-            get {
-                return ResourceManager.GetString("TaskHelpers_TweetMessage_Tweet_successfully_sent_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to find a valid Twitter account..
-        /// </summary>
-        internal static string TaskHelpers_TweetMessage_Unable_to_find_valid_Twitter_account_ {
-            get {
-                return ResourceManager.GetString("TaskHelpers_TweetMessage_Unable_to_find_valid_Twitter_account_", resourceCulture);
             }
         }
         

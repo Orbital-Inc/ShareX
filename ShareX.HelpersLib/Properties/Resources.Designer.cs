@@ -19,7 +19,7 @@ namespace ShareX.HelpersLib.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -151,6 +151,15 @@ namespace ShareX.HelpersLib.Properties {
         internal static string AfterCaptureTasks_AddImageEffects {
             get {
                 return ResourceManager.GetString("AfterCaptureTasks_AddImageEffects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyze image.
+        /// </summary>
+        internal static string AfterCaptureTasks_AnalyzeImage {
+            get {
+                return ResourceManager.GetString("AfterCaptureTasks_AnalyzeImage", resourceCulture);
             }
         }
         
@@ -635,6 +644,16 @@ namespace ShareX.HelpersLib.Properties {
         internal static System.Drawing.Bitmap cross {
             get {
                 object obj = ResourceManager.GetObject("cross", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cross_circle {
+            get {
+                object obj = ResourceManager.GetObject("cross-circle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1253,6 +1272,15 @@ namespace ShareX.HelpersLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analyze image.
+        /// </summary>
+        internal static string HotkeyType_AnalyzeImage {
+            get {
+                return ResourceManager.GetString("HotkeyType_AnalyzeImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Auto capture.
         /// </summary>
         internal static string HotkeyType_AutoCapture {
@@ -1829,6 +1857,15 @@ namespace ShareX.HelpersLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stop auto capture.
+        /// </summary>
+        internal static string HotkeyType_StopAutoCapture {
+            get {
+                return ResourceManager.GetString("HotkeyType_StopAutoCapture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stop screen recording.
         /// </summary>
         internal static string HotkeyType_StopScreenRecording {
@@ -1870,15 +1907,6 @@ namespace ShareX.HelpersLib.Properties {
         internal static string HotkeyType_ToggleTrayMenu {
             get {
                 return ResourceManager.GetString("HotkeyType_ToggleTrayMenu", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tweet message.
-        /// </summary>
-        internal static string HotkeyType_TweetMessage {
-            get {
-                return ResourceManager.GetString("HotkeyType_TweetMessage", resourceCulture);
             }
         }
         
@@ -2441,6 +2469,105 @@ namespace ShareX.HelpersLib.Properties {
         internal static string PrintTextForm_LoadSettings_Name___0___Size___1_ {
             get {
                 return ResourceManager.GetString("PrintTextForm_LoadSettings_Name___0___Size___1_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 Day.
+        /// </summary>
+        internal static string PrivateBinExpiration_D1 {
+            get {
+                return ResourceManager.GetString("PrivateBinExpiration_D1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 Hour.
+        /// </summary>
+        internal static string PrivateBinExpiration_H1 {
+            get {
+                return ResourceManager.GetString("PrivateBinExpiration_H1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 Month.
+        /// </summary>
+        internal static string PrivateBinExpiration_M1 {
+            get {
+                return ResourceManager.GetString("PrivateBinExpiration_M1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10 Minutes.
+        /// </summary>
+        internal static string PrivateBinExpiration_M10 {
+            get {
+                return ResourceManager.GetString("PrivateBinExpiration_M10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5 Minutes.
+        /// </summary>
+        internal static string PrivateBinExpiration_M5 {
+            get {
+                return ResourceManager.GetString("PrivateBinExpiration_M5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never.
+        /// </summary>
+        internal static string PrivateBinExpiration_N {
+            get {
+                return ResourceManager.GetString("PrivateBinExpiration_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 Week.
+        /// </summary>
+        internal static string PrivateBinExpiration_W1 {
+            get {
+                return ResourceManager.GetString("PrivateBinExpiration_W1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 Year.
+        /// </summary>
+        internal static string PrivateBinExpiration_Y1 {
+            get {
+                return ResourceManager.GetString("PrivateBinExpiration_Y1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Markdown.
+        /// </summary>
+        internal static string PrivateBinFormat_Markdown {
+            get {
+                return ResourceManager.GetString("PrivateBinFormat_Markdown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plain Text.
+        /// </summary>
+        internal static string PrivateBinFormat_PlainText {
+            get {
+                return ResourceManager.GetString("PrivateBinFormat_PlainText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Syntax Highlighting.
+        /// </summary>
+        internal static string PrivateBinFormat_SyntaxHighlighting {
+            get {
+                return ResourceManager.GetString("PrivateBinFormat_SyntaxHighlighting", resourceCulture);
             }
         }
         
@@ -3228,6 +3355,15 @@ namespace ShareX.HelpersLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Spotlight.
+        /// </summary>
+        internal static string ShapeType_ToolSpotlight {
+            get {
+                return ResourceManager.GetString("ShapeType_ToolSpotlight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon ShareX_Icon {
@@ -3466,6 +3602,16 @@ namespace ShareX.HelpersLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tick_circle {
+            get {
+                object obj = ResourceManager.GetObject("tick-circle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit image.
         /// </summary>
         internal static string ToastClickAction_AnnotateImage {
@@ -3516,6 +3662,15 @@ namespace ShareX.HelpersLib.Properties {
         internal static string ToastClickAction_CopyUrl {
             get {
                 return ResourceManager.GetString("ToastClickAction_CopyUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete file locally.
+        /// </summary>
+        internal static string ToastClickAction_DeleteFile {
+            get {
+                return ResourceManager.GetString("ToastClickAction_DeleteFile", resourceCulture);
             }
         }
         
